@@ -1,0 +1,29 @@
+import React from "react";
+import Logo from "/logo.png";
+import { Outlet } from "react-router-dom";
+
+const DashboardLayout = () => {
+  return (
+    <div>
+      <div className="fixed top-0 left-0 bg-[#1E3050] w-full p-2 flex items-center shadow-xl">
+        <div className="w-full">
+          <i class="fas fa-home text-xl text-white"></i>
+        </div>
+
+        <div className="w-full flex justify-center">
+          <img src={Logo} className="w-20" />
+        </div>
+
+        <div className="w-full text-end">
+          <i class="fas fa-bell text-xl text-white"></i>
+        </div>
+      </div>
+
+      <div className="pt-10 h-screen">
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+
+export default DashboardLayout;
