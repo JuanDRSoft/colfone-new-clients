@@ -37,6 +37,7 @@ function App() {
       ) : (
         <Routes>
           <Route path="/" element={<Error />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       )}
     </BrowserRouter>
