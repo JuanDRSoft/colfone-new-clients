@@ -1,12 +1,16 @@
 import React from "react";
+import useAuth from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
+  const { cerrarSesionAuth, wallet } = useAuth();
+
   return (
     <div className="grid h-full">
       <section className="bg-[#F24C3C] h-full p-5 grid items-center">
         <div className="bg-white flex items-center justify-between p-2 px-5 rounded-lg text-[#1E3050]">
           <div>
-            <p className="font-bold text-4xl">$35.000.000</p>
+            <p className="font-bold text-4xl">${wallet?.value}</p>
             <span className="font-semibold">Fondos disponibles</span>
           </div>
 
@@ -14,10 +18,13 @@ const Dashboard = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-3 mt-4">
-          <div className="flex items-center justify-between bg-[#1E3050] text-white p-2 px-4 rounded-lg">
+          <Link
+            to="/dashboard/fondos"
+            className="flex items-center justify-between bg-[#1E3050] text-white p-2 px-4 rounded-lg"
+          >
             <p className=" font-bold leading-tight">Agregar fondos</p>
             <i class="fas fa-plus-circle text-3xl"></i>
-          </div>
+          </Link>
 
           <div className="flex items-center justify-between bg-[#1E3050] text-white p-2 px-4 rounded-lg">
             <p className=" font-bold leading-tight">Historial de fondos</p>
@@ -87,6 +94,14 @@ const Dashboard = () => {
           <div className="flex items-center justify-between bg-white text-[#1E3050] p-2 px-4 rounded-lg">
             <p className=" font-bold leading-tight">Soporte</p>
             <i class="fab fa-whatsapp text-3xl"></i>
+          </div>
+
+          <div
+            className="flex items-center justify-between bg-white text-[#1E3050] p-2 px-4 rounded-lg"
+            onClick={cerrarSesionAuth}
+          >
+            <p className=" font-bold leading-tight">Logout</p>
+            <i class="fas fa-sign-out-alt text-3xl"></i>
           </div>
         </div>
       </section>

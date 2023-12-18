@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Logo from "/logo.png";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
@@ -21,7 +21,9 @@ const DashboardLayout = () => {
     <div>
       <div className="fixed top-0 left-0 bg-[#1E3050] w-full p-2 flex items-center shadow-xl">
         <div className="w-full">
-          <i class="fas fa-home text-xl text-white"></i>
+          <Link to="/dashboard">
+            <i class="fas fa-home text-xl text-white"></i>
+          </Link>
         </div>
 
         <div className="w-full flex justify-center">

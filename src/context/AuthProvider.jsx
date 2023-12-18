@@ -3,6 +3,7 @@ import React from "react";
 import { useState, createContext, useEffect } from "react";
 import { URL_BASE } from "../utils/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -151,6 +152,7 @@ const AuthProvider = ({ children }) => {
     navigate("/");
     setAuth({});
     localStorage.removeItem("token");
+    toast("Hasta luego, Vuelve pronto!");
   };
 
   const submitAdmin = async (admin, close) => {
@@ -231,11 +233,7 @@ const AuthProvider = ({ children }) => {
       const { data } = await axios.post(`${URL_BASE}/api/wallets`, value);
       setWallet(data);
 
-      setAlerta({
-        msg: "Fondos agregados",
-        type: "success",
-        open: true,
-      });
+      toast.success("Enviado Correctamente");
       initial();
     } catch (error) {
       console.log(error);
@@ -249,11 +247,7 @@ const AuthProvider = ({ children }) => {
         value
       );
       setWallet(data);
-      setAlerta({
-        msg: "Fondos agregados",
-        type: "success",
-        open: true,
-      });
+      toast.success("Enviado Correctamente");
       initial();
     } catch (error) {
       console.log(error);
