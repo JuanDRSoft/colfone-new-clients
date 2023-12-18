@@ -1,12 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "/logo.png";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { URL_BASE } from "../utils/api";
+import useAuth from "../hooks/useAuth";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showPass, setShowPass] = useState(false);
+
   const navigate = useNavigate();
 
-  const onLogin = () => {
-    navigate("/dashboard");
+  const { setAuth } = useAuth();
+
+  const onLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const { data } = await axios.post(`${URL_BASE}/api/clients/login`, {
+        email,
+        password,
+      });
+
+      setAuth(data);
+      localStorage.setItem("token", data.token);
+      setLoading(false);
+      navigate("/dashboard");
+      toast.success(`Bienvenido ${data.name}!!`);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+      toast.error("Contraseña o email incorrectos");
+    }
   };
 
   return (
@@ -36,12 +65,30 @@ const Login = () => {
             className="bg-white p-1 mb-4 w-full rounded pl-4"
             placeholder="Email"
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <input
-            className="bg-white p-1 mb-4 w-full rounded pl-4"
-            placeholder="Contraseña"
-            type="password"
-          />
+          <div className="relative">
+            <input
+              className="bg-white p-1 mb-4 w-full rounded pl-4"
+              placeholder="Contraseña"
+              type={showPass ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            {showPass ? (
+              <i
+                class="fas fa-eye-slash absolute top-2 right-2 cursor-pointer"
+                onClick={() => setShowPass(!showPass)}
+              ></i>
+            ) : (
+              <i
+                class="fas fa-eye absolute top-2 right-2 cursor-pointer"
+                onClick={() => setShowPass(!showPass)}
+              ></i>
+            )}
+          </div>
         </form>
 
         <Link to="/forgot-pass">
@@ -56,8 +103,14 @@ const Login = () => {
             onClick={onLogin}
             className="bg-[#F24C3C] text-white font-semibold rounded w-[70%] flex justify-center items-center gap-2 p-1"
           >
-            Iniciar
-            <i class="fas fa-arrow-circle-right text-2xl"></i>
+            {loading ? (
+              <i class="fas fa-spinner text-2xl animate-spin"></i>
+            ) : (
+              <>
+                Iniciar
+                <i class="fas fa-arrow-circle-right text-2xl"></i>
+              </>
+            )}
           </button>
         </div>
       </div>

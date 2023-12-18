@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "/logo.png";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
+  const { auth } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (auth) {
+      if (!token) {
+        navigate("/");
+      }
+    }
+  }, [auth]);
+
   return (
     <div>
       <div className="fixed top-0 left-0 bg-[#1E3050] w-full p-2 flex items-center shadow-xl">

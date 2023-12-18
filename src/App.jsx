@@ -6,6 +6,10 @@ import Error from "./pages/Error";
 import ForgotPass from "./auth/ForgotPass";
 import DashboardLayout from "./layout/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { AuthProvider } from "./context/AuthProvider";
+import useAuth from "./hooks/useAuth";
 
 function App() {
   const [mobile, setMobile] = useState(false);
@@ -24,22 +28,26 @@ function App() {
 
   return (
     <BrowserRouter>
-      {mobile ? (
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-pass" element={<ForgotPass />} />
+      <AuthProvider>
+        {mobile ? (
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forgot-pass" element={<ForgotPass />} />
 
-          <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<Dashboard />} />
-          </Route>
-        </Routes>
-      ) : (
-        <Routes>
-          <Route path="/" element={<Error />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      )}
+            <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route index element={<Dashboard />} />
+            </Route>
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Error />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        )}
+
+        <ToastContainer />
+      </AuthProvider>
     </BrowserRouter>
   );
 }
