@@ -45,17 +45,17 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    if (!token) {
-      setCargando(false);
-      return;
-    }
-
     const config = {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     };
+
+    if (!token) {
+      setCargando(false);
+      return;
+    }
 
     const autenticarAdmin = async () => {
       try {

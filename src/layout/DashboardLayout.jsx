@@ -19,7 +19,7 @@ const DashboardLayout = () => {
 
   return (
     <div>
-      <div className="fixed top-0 left-0 bg-[#1E3050] w-full p-2 flex items-center shadow-xl">
+      <div className="fixed z-10 top-0 left-0 bg-[#1E3050] w-full p-2 flex items-center shadow-xl">
         <div className="w-full">
           <Link to="/dashboard">
             <i class="fas fa-home text-xl text-white"></i>

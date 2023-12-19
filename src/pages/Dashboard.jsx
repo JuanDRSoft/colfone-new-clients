@@ -5,12 +5,21 @@ import { Link } from "react-router-dom";
 const Dashboard = () => {
   const { cerrarSesionAuth, wallet } = useAuth();
 
+  const formatearNumero = (numero) => {
+    return numero
+      ?.toString()
+      .replace(/\./g, ",")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
   return (
     <div className="grid h-full">
       <section className="bg-[#F24C3C] h-full p-5 grid items-center">
         <div className="bg-white flex items-center justify-between p-2 px-5 rounded-lg text-[#1E3050]">
           <div>
-            <p className="font-bold text-4xl">${wallet?.value}</p>
+            <p className="font-bold text-4xl">
+              ${formatearNumero(wallet?.value)}
+            </p>
             <span className="font-semibold">Fondos disponibles</span>
           </div>
 
