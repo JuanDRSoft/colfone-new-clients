@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Logo from "/logo.png";
+import Logo from "/logo.svg";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 

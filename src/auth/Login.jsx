@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "/logo.png";
+import Logo from "/logo.svg";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { URL_BASE } from "../utils/api";
@@ -45,14 +45,7 @@ const Login = () => {
           <img src={Logo} className="max-w-[55%] w-full" />
         </div>
 
-        <Link to="/register">
-          <p className="font-semibold text-white flex justify-end items-center gap-2 mt-4 mb-4">
-            Crear una cuenta
-            <i class="fas fa-arrow-circle-right text-2xl"></i>
-          </p>
-        </Link>
-
-        <h1 className="text-white font-bold text-center text-2xl">
+        <h1 className="text-white font-bold text-center text-2xl mt-20">
           Iniciar Sesión
         </h1>
 
@@ -60,9 +53,9 @@ const Login = () => {
           Ingresa la información correspondiente
         </p>
 
-        <form className="mt-5">
+        <form className="mt-7 mb-7">
           <input
-            className="bg-white p-1 mb-4 w-full rounded pl-4"
+            className="bg-white p-1 mb-4 w-full rounded pl-4 text-lg"
             placeholder="Email"
             type="email"
             value={email}
@@ -70,7 +63,7 @@ const Login = () => {
           />
           <div className="relative">
             <input
-              className="bg-white p-1 mb-4 w-full rounded pl-4"
+              className="bg-white p-1 mb-4 w-full rounded pl-4 text-lg"
               placeholder="Contraseña"
               type={showPass ? "text" : "password"}
               value={password}
@@ -91,17 +84,10 @@ const Login = () => {
           </div>
         </form>
 
-        <Link to="/forgot-pass">
-          <p className="font-semibold text-white flex justify-end items-center gap-2 mt-4">
-            Olvide mi contraseña
-            <i class="fas fa-arrow-circle-right text-2xl"></i>
-          </p>
-        </Link>
-
         <div className="flex justify-center mt-4">
           <button
             onClick={onLogin}
-            className="bg-[#F24C3C] text-white font-semibold rounded w-[70%] flex justify-center items-center gap-2 p-1"
+            className="bg-[#F24C3C] text-xl text-white font-semibold rounded w-[70%] flex justify-center items-center gap-2 p-1"
           >
             {loading ? (
               <i class="fas fa-spinner text-2xl animate-spin"></i>
@@ -113,6 +99,20 @@ const Login = () => {
             )}
           </button>
         </div>
+
+        <Link to="/forgot-pass">
+          <p className="font-semibold text-white flex justify-end items-center gap-2 mt-10">
+            Olvide mi contraseña
+            <i class="fas fa-arrow-circle-right text-2xl"></i>
+          </p>
+        </Link>
+
+        <Link to="/register">
+          <p className="font-semibold text-white flex justify-end items-center gap-2 mt-4 mb-4">
+            Crear una cuenta
+            <i class="fas fa-arrow-circle-right text-2xl"></i>
+          </p>
+        </Link>
       </div>
     </div>
   );

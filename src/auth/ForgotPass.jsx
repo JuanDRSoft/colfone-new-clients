@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "/logo.png";
+import Logo from "/logo.svg";
 import axios from "axios";
 import { URL_BASE } from "../utils/api";
 import { toast } from "react-toastify";
@@ -115,7 +115,7 @@ const ForgotPass = () => {
         {tab == 1 && (
           <form className="mt-5">
             <input
-              className="bg-white p-1 mb-4 w-full rounded pl-4"
+              className="bg-white p-1 mb-4 w-full rounded pl-4 text-lg"
               placeholder="Email"
               type="email"
               value={email}
@@ -125,7 +125,7 @@ const ForgotPass = () => {
             <div className="flex justify-center mt-4">
               <button
                 onClick={send}
-                className="bg-[#F24C3C] text-white font-semibold rounded w-[70%] flex justify-center items-center gap-2 p-1"
+                className="bg-[#F24C3C] text-xl text-white font-semibold rounded w-[70%] flex justify-center items-center gap-2 p-1"
               >
                 Enviar Código
                 <i class="fas fa-arrow-circle-right text-2xl"></i>
@@ -137,7 +137,7 @@ const ForgotPass = () => {
         {tab == 2 && (
           <form className="mt-5">
             <input
-              className="bg-white p-1 mb-4 w-full rounded pl-4"
+              className="bg-white p-1 mb-4 text-lg w-full rounded pl-4"
               placeholder="Codigo"
               type="text"
               value={code}
@@ -147,7 +147,7 @@ const ForgotPass = () => {
             <div className="flex justify-center mt-4">
               <button
                 onClick={verify}
-                className="bg-[#F24C3C] text-white font-semibold rounded w-[70%] flex justify-center items-center gap-2 p-1"
+                className="bg-[#F24C3C] text-xl text-white font-semibold rounded w-[70%] flex justify-center items-center gap-2 p-1"
               >
                 Confirmar Codigo
                 <i class="fas fa-arrow-circle-right text-2xl"></i>
@@ -160,7 +160,7 @@ const ForgotPass = () => {
           <form className="mt-5">
             <div className="relative">
               <input
-                className="bg-white p-1 mb-4 w-full rounded pl-4"
+                className="bg-white p-1 mb-4 w-full text-lg rounded pl-4"
                 placeholder="Nueva Contraseña"
                 type={showPassword ? "text" : "password"}
                 value={newPass}
@@ -183,7 +183,7 @@ const ForgotPass = () => {
             <div className="flex justify-center mt-4">
               <button
                 onClick={resetPassword}
-                className="bg-[#F24C3C] text-white font-semibold rounded w-[70%] flex justify-center items-center gap-2 p-1"
+                className="bg-[#F24C3C] text-xl text-white font-semibold rounded w-[70%] flex justify-center items-center gap-2 p-1"
               >
                 Confirmar Codigo
                 <i class="fas fa-arrow-circle-right text-2xl"></i>

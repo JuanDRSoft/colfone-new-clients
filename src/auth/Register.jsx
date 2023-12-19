@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "/logo.png";
+import Logo from "/logo.svg";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { URL_BASE } from "../utils/api";
@@ -79,29 +79,24 @@ const Register = () => {
           <img src={Logo} className="max-w-[55%] w-full" />
         </div>
 
-        <Link to="/">
-          <p className="font-semibold text-white flex justify-end items-center gap-2 mt-4 mb-4">
-            Ya tengo una cuenta
-            <i class="fas fa-arrow-circle-right text-2xl"></i>
-          </p>
-        </Link>
-
-        <h1 className="text-white font-bold text-center text-2xl">Registro</h1>
+        <h1 className="text-white font-bold text-center text-2xl mt-16">
+          Registro
+        </h1>
 
         <p className="text-center text-white mt-2 font-semibold">
           Llena los campos con tus datos
         </p>
 
-        <form className="mt-5">
+        <form className="mt-7 mb-7">
           <input
-            className="bg-white p-1 mb-4 w-full rounded pl-4"
+            className="bg-white p-1 mb-4 w-full rounded pl-4 text-lg"
             placeholder="Nombres"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <input
-            className="bg-white p-1 mb-4 w-full rounded pl-4"
+            className="bg-white p-1 mb-4 w-full rounded pl-4 text-lg"
             placeholder="Apellidos"
             type="text"
             value={lastname}
@@ -109,7 +104,7 @@ const Register = () => {
           />
 
           <select
-            className="bg-white p-1 mb-4 w-full rounded pl-4"
+            className="bg-white p-1 mb-4 w-full rounded pl-4 text-lg"
             value={countrie}
             onChange={(e) => setCountrie(e.target.value)}
           >
@@ -120,7 +115,7 @@ const Register = () => {
           </select>
 
           <input
-            className="bg-white p-1 mb-4 w-full rounded pl-4"
+            className="bg-white p-1 mb-4 w-full rounded pl-4 text-lg"
             placeholder="WhatsApp"
             type="text"
             value={phone}
@@ -128,21 +123,21 @@ const Register = () => {
           />
 
           <input
-            className="bg-white p-1 mb-4 w-full rounded pl-4"
+            className="bg-white p-1 mb-4 w-full rounded pl-4 text-lg"
             placeholder="Email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
-            className="bg-white p-1 mb-4 w-full rounded pl-4"
+            className="bg-white p-1 mb-4 w-full rounded pl-4 text-lg"
             placeholder="Contraseña"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <input
-            className="bg-white p-1 mb-4 w-full rounded pl-4"
+            className="bg-white p-1 mb-4 w-full rounded pl-4 text-lg"
             placeholder="Confirmar Contraseña"
             type="password"
             value={confirmPassword}
@@ -153,7 +148,7 @@ const Register = () => {
         <div className="flex justify-center mt-4">
           <button
             onClick={onSubmit}
-            className="bg-[#F24C3C] text-white font-semibold rounded w-[70%] flex justify-center items-center gap-2 p-1"
+            className="bg-[#F24C3C] text-xl text-white font-semibold rounded w-[70%] flex justify-center items-center gap-2 p-1"
           >
             {loading ? (
               <i class="fas fa-spinner text-2xl animate-spin"></i>
@@ -165,6 +160,13 @@ const Register = () => {
             )}
           </button>
         </div>
+
+        <Link to="/">
+          <p className="font-semibold text-white flex justify-end items-center gap-2 mt-10 mb-4">
+            Ya tengo una cuenta
+            <i class="fas fa-arrow-circle-right text-2xl"></i>
+          </p>
+        </Link>
       </div>
     </div>
   );

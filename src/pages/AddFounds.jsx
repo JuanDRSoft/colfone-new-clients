@@ -23,11 +23,9 @@ const AddFounds = () => {
 
   useEffect(() => {
     setLoading(true);
-    if (payments.length && auth._id) {
-      const filter = payments.filter((e) => e.countrie == auth.countries);
-      setData(filter);
-      setLoading(false);
-    }
+    const filter = payments?.filter((e) => e.countrie == auth.countries);
+    setData(filter);
+    setLoading(false);
   }, [auth, payments]);
 
   const initial = () => {
