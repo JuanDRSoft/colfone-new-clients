@@ -15,6 +15,34 @@ import AddFounds from "./pages/AddFounds";
 function App() {
   const [mobile, setMobile] = useState(false);
 
+  function activarPantallaCompleta() {
+    var elemento = document.documentElement; // Elemento raíz, por ejemplo, el elemento <html>
+
+    if (elemento.requestFullscreen) {
+      elemento.requestFullscreen();
+    } else if (elemento.mozRequestFullScreen) {
+      // Para Firefox
+      elemento.mozRequestFullScreen();
+    } else if (elemento.webkitRequestFullscreen) {
+      // Para Chrome, Safari y Opera
+      elemento.webkitRequestFullscreen();
+    } else if (elemento.msRequestFullscreen) {
+      // Para Internet Explorer y Edge
+      elemento.msRequestFullscreen();
+    }
+  }
+
+  function simularClic() {
+    // Selecciona el elemento por su ID
+    var boton = document.getElementById("miBoton");
+
+    // Crea un evento de clic
+    var eventoClic = new Event("click");
+
+    // Dispara el evento de clic en el elemento
+    boton.dispatchEvent(eventoClic);
+  }
+
   useEffect(() => {
     const isMobileDevice = /iPhone|iPad|iPod|Android/i.test(
       navigator.userAgent
@@ -22,6 +50,7 @@ function App() {
 
     if (isMobileDevice) {
       setMobile(true);
+      simularClic();
     } else {
       setMobile(false);
     }
@@ -50,6 +79,10 @@ function App() {
 
         <ToastContainer />
       </AuthProvider>
+
+      <button id="miBoton" className="hidden" onClick={activarPantallaCompleta}>
+        Pantalla completa
+      </button>
     </BrowserRouter>
   );
 }
