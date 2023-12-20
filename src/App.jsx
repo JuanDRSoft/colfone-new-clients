@@ -37,10 +37,9 @@ function App() {
     var boton = document.getElementById("miBoton");
 
     // Crea un evento de clic
-    var eventoClic = new Event("click");
 
     // Dispara el evento de clic en el elemento
-    boton.dispatchEvent(eventoClic);
+    boton.click();
   }
 
   useEffect(() => {
@@ -50,7 +49,10 @@ function App() {
 
     if (isMobileDevice) {
       setMobile(true);
-      simularClic();
+      setTimeout(simularClic, 2000);
+      // document.addEventListener("DOMContentLoaded", function () {
+      //   activarPantallaCompleta();
+      // });
     } else {
       setMobile(false);
     }
@@ -80,7 +82,7 @@ function App() {
         <ToastContainer />
       </AuthProvider>
 
-      <button id="miBoton" className="hidden" onClick={activarPantallaCompleta}>
+      <button id="miBoton" className="" onClick={activarPantallaCompleta}>
         Pantalla completa
       </button>
     </BrowserRouter>
