@@ -73,6 +73,40 @@ const AuthProvider = ({ children }) => {
       }
     };
 
+    autenticarAdmin();
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      setCargando(false);
+      return;
+    }
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const getWallet = async (id) => {
+      try {
+        const { data } = await axios.get(
+          `${URL_BASE}/api/wallets/user/${id}`,
+          config
+        );
+        setWallet(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (auth._id) {
+      getWallet(auth._id);
+    }
+
     const getAllProducts = async () => {
       try {
         const { data } = await axios.get(`${URL_BASE}/api/products`, config);
@@ -113,39 +147,6 @@ const AuthProvider = ({ children }) => {
     getAllServices();
     getAllPlataforms();
     getAllProducts();
-    autenticarAdmin();
-  }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      setCargando(false);
-      return;
-    }
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    const getWallet = async (id) => {
-      try {
-        const { data } = await axios.get(
-          `${URL_BASE}/api/wallets/user/${id}`,
-          config
-        );
-        setWallet(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    if (auth._id) {
-      getWallet(auth._id);
-    }
   }, [auth]);
 
   const cerrarSesionAuth = () => {

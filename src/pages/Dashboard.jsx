@@ -53,10 +53,13 @@ const Dashboard = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-3 mt-4">
-          <div className="flex items-center justify-between bg-[#1E3050] text-white p-2 px-4 rounded-lg">
+          <Link
+            to="/dashboard/ordenes"
+            className="flex items-center gap-1 justify-between bg-[#1E3050] text-white p-2 px-4 rounded-lg"
+          >
             <p className=" font-bold leading-tight">Nueva orden</p>
             <i class="fas fa-plus-circle text-3xl"></i>
-          </div>
+          </Link>
 
           <div className="flex items-center justify-between bg-[#1E3050] text-white p-2 px-4 rounded-lg">
             <p className=" font-bold leading-tight">Todas las ordenes</p>

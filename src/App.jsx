@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./context/AuthProvider";
 import useAuth from "./hooks/useAuth";
 import AddFounds from "./pages/AddFounds";
+import AddOrder from "./pages/AddOrder";
 
 function App() {
   const [mobile, setMobile] = useState(false);
@@ -39,6 +40,7 @@ function App() {
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="/dashboard/fondos" element={<AddFounds />} />
+              <Route path="/dashboard/ordenes" element={<AddOrder />} />
             </Route>
           </Routes>
         ) : (
