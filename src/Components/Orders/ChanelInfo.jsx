@@ -8,7 +8,8 @@ const ChanelInfo = () => {
 
   useEffect(() => {
     function extractUsernameFromUrl(url) {
-      const usernameRegex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/@(.+)$/i;
+      const usernameRegex =
+        /(?:https?:\/\/)?(?:www\.)?youtube\.com\/@([^\/?]+)/i;
       const usernameMatch = url.match(usernameRegex);
       return usernameMatch ? usernameMatch[1] : null;
     }
