@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 import { formatearNumero } from "../utils/api";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import ChanelInfo from "../Components/Orders/ChanelInfo";
 
 const AddOrder = () => {
   const [plataformSelect, setPlataform] = useState("");
@@ -177,7 +178,7 @@ const AddOrder = () => {
         </>
       )}
 
-      {tab == 2 && plataformSelect == "650f6df8a9f769232a5d6c8c" && (
+      {tab == 2 && serviceSelect.includes("Vistas") && (
         <>
           <div className="bg-[#1E3050] mt-5 rounded-lg p-2">
             <h1 className="text-white text-center font-semibold text-lg">
@@ -235,6 +236,8 @@ const AddOrder = () => {
           </div>
         </>
       )}
+
+      {tab == 2 && serviceSelect.includes("Suscriptores") && <ChanelInfo />}
 
       {tab == 2 && (
         <>

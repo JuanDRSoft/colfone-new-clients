@@ -70,10 +70,7 @@ const Dashboard = () => {
 
       <section className="grid items-center px-1 mt-3">
         <div className="grid">
-          <Link
-            to="/dashboard/ordenes"
-            className="flex items-center gap-5 justify-between bg-[#1E3050] text-[#1E3050] px-4 rounded-lg"
-          >
+          <Link className="flex items-center gap-5 justify-between bg-[#1E3050] text-[#1E3050] px-4 rounded-lg">
             <div className="bg-blue-400 p-3 w-14 h-14 flex justify-center items-center rounded-xl">
               <i class="fas fa-rocket text-3xl"></i>
             </div>
