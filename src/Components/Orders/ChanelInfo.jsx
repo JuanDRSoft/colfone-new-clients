@@ -29,12 +29,20 @@ const ChanelInfo = () => {
         try {
           // Realiza la solicitud a la API de YouTube
           const response = await axios.get(
-            `https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&forUsername=${username}&key=${apiKey}`
+            `https://www.googleapis.com/youtube/v3/search?part=id,snippet&maxResults=1&type=channel&q=@${username}&key=${apiKey}`
           );
 
           // Actualiza el estado con los datos del video
-          console.log(response?.data.items[0]);
-          setCanalData(response?.data.items[0]);
+          const data = response?.data.items[0].snippet.channelId;
+          // setCanalData(response?.data.items[0]);
+
+          const response2 = await axios.get(
+            `https://www.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&id=${data}&key=${apiKey}`
+          );
+
+          setCanalData(response2?.data.items[0]);
+
+          console.log(response2);
         } catch (error) {
           console.error("Error al obtener datos del video:", error);
         }
