@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [dataCart, setDataCart] = useState([]);
   const [payments, setPayments] = useState([]);
+  const [soporte, setSoporte] = useState("");
 
   const [wallet, setWallet] = useState({});
 
@@ -143,10 +144,23 @@ const AuthProvider = ({ children }) => {
       }
     };
 
+    const getSoporte = async () => {
+      try {
+        const { data } = await axios.get(
+          `${URL_BASE}/api/admin/soporte/659dfc9f284143e03209f6a0`,
+          config
+        );
+        setSoporte(data.phone);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     getAllPayments();
     getAllServices();
     getAllPlataforms();
     getAllProducts();
+    getSoporte();
   }, [auth]);
 
   const cerrarSesionAuth = () => {
@@ -278,6 +292,7 @@ const AuthProvider = ({ children }) => {
         wallet,
         handleWallet,
         payments,
+        soporte,
       }}
     >
       {children}

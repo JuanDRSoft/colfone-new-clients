@@ -3,7 +3,7 @@ import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
-  const { cerrarSesionAuth, wallet } = useAuth();
+  const { cerrarSesionAuth, wallet, soporte } = useAuth();
 
   const formatearNumero = (numero) => {
     return numero
@@ -126,10 +126,14 @@ const Dashboard = () => {
             <i class="fas fa-user-circle text-3xl"></i>
           </div>
 
-          <div className="flex items-center justify-between bg-white text-[#1E3050] p-2 px-4 rounded-lg">
+          <a
+            href={`https://wa.me/${soporte}`}
+            target="_blank"
+            className="flex items-center justify-between bg-white text-[#1E3050] p-2 px-4 rounded-lg"
+          >
             <p className=" font-bold leading-tight">Soporte</p>
             <i class="fab fa-whatsapp text-3xl"></i>
-          </div>
+          </a>
 
           {/* <div
             className="flex items-center justify-between bg-white text-[#1E3050] p-2 px-4 rounded-lg"

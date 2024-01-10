@@ -11,8 +11,7 @@ const Error = () => {
     >
       <div className="flex md:w-[40%] border p-5 rounded-xl shadow bg-white">
         <p className="text-center font-semibold">
-          Este sitio web no esta creado para ordenadores por favor ingresa desde
-          un dispositivo mobile
+          Este sitio esta disponible solo para dispositivos móviles.
         </p>
       </div>
     </div>
