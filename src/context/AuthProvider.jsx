@@ -105,7 +105,20 @@ const AuthProvider = ({ children }) => {
       }
     };
 
+    const getOrdenes = async () => {
+      try {
+        const { data } = await axios.get(
+          `${URL_BASE}/api/sales/salesByUser/${auth._id}`,
+          config
+        );
+        setSales(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     if (auth._id) {
+      getOrdenes();
       getWallet(auth._id);
     }
 
@@ -365,6 +378,7 @@ const AuthProvider = ({ children }) => {
         payments,
         soporte,
         handleSale,
+        sales,
       }}
     >
       {children}

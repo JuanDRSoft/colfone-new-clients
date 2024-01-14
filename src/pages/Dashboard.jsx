@@ -53,7 +53,10 @@ const Dashboard = () => {
             </div>
           </Link>
 
-          <div className="flex items-center gap-5 justify-between bg-[#1E3050] text-[#1E3050] mt-3 px-4 rounded-lg">
+          <Link
+            to="/dashboard/ordenes-lista"
+            className="flex items-center gap-5 justify-between bg-[#1E3050] text-[#1E3050] mt-3 px-4 rounded-lg"
+          >
             <div className="bg-green-500 p-3 w-14 h-14 flex justify-center items-center rounded-xl">
               <i class="fas fa-list-alt text-3xl"></i>
             </div>
@@ -64,7 +67,7 @@ const Dashboard = () => {
               </p>
               <i class="fas fa-arrow-circle-right text-3xl"></i>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
 
