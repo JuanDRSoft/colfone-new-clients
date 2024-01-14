@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [dataCart, setDataCart] = useState([]);
   const [payments, setPayments] = useState([]);
+  const [sales, setSales] = useState([]);
   const [soporte, setSoporte] = useState("");
 
   const [wallet, setWallet] = useState({});
@@ -269,6 +270,76 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const handleSale = (value, initial, close) => {
+    if (value.id) {
+      editSale(value, initial, close);
+    } else {
+      createSale(value, initial, close);
+    }
+  };
+
+  const createSale = async (value, initial) => {
+    try {
+      const { data } = await axios.post(`${URL_BASE}/api/sales`, value);
+      setSales([...sales, data]);
+
+      const body = {
+        value: Number(wallet.value) - Number(value.price[wallet.currency]),
+      };
+
+      const { data: walletData } = await axios.put(
+        `${URL_BASE}/api/wallets/${wallet._id}`,
+        body
+      );
+
+      toast.success("Compra Realizada Correctamente");
+      setTimeout(() => {
+        initial();
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editSale = async (value, initial, close) => {
+    try {
+      const { data } = await axios.put(
+        `${URL_BASE}/api/sales/${value.id}`,
+        value
+      );
+
+      const salesUpdates = sales.map((saleState) =>
+        saleState._id === data._id ? data : saleState
+      );
+
+      setSales(salesUpdates);
+
+      initial();
+      setTimeout(() => close(), 1000);
+    } catch (error) {
+      console.log(error);
+      setOpenAlert(true);
+      setMsg(error);
+    }
+  };
+
+  const deleteSale = async (id) => {
+    try {
+      const { data } = await axios.delete(`${URL_BASE}/api/sales/${id}`);
+
+      const salesUpdates = sales.filter((e) => e._id !== id);
+
+      setSales(salesUpdates);
+      setOpenAlert(true);
+      setType("success");
+      setMsg("Eliminado correctamente");
+    } catch (error) {
+      console.log(error);
+      setOpenAlert(true);
+      setMsg(error);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -293,6 +364,7 @@ const AuthProvider = ({ children }) => {
         handleWallet,
         payments,
         soporte,
+        handleSale,
       }}
     >
       {children}

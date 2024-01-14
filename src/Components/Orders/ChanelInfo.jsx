@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { formatearNumero } from "../../utils/api";
 import axios from "axios";
 
-const ChanelInfo = () => {
+const ChanelInfo = (setYoutubeData) => {
   const [CanalData, setCanalData] = useState(null);
   const [CanalUrl, setCanalUrl] = useState("");
 
@@ -42,7 +42,7 @@ const ChanelInfo = () => {
           );
 
           setCanalData(response2?.data.items[0]);
-
+          setYoutubeData(response2?.data.items[0]);
           console.log(response2);
         } catch (error) {
           console.error("Error al obtener datos del video:", error);
@@ -61,6 +61,7 @@ const ChanelInfo = () => {
           // Actualiza el estado con los datos del video
           console.log(response?.data.items[0]);
           setCanalData(response?.data.items[0]);
+          setYoutubeData(response2?.data.items[0]);
         } catch (error) {
           console.error("Error al obtener datos del video:", error);
         }

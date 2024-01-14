@@ -2,23 +2,28 @@ import React, { useEffect, useState } from "react";
 import { plataforms, servicesEx } from "../utils/data";
 import useAuth from "../hooks/useAuth";
 import { formatearNumero } from "../utils/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ChanelInfo from "../Components/Orders/ChanelInfo";
+import { toast } from "react-toastify";
 
 const AddOrder = () => {
   const [plataformSelect, setPlataform] = useState("");
   const [serviceSelect, setService] = useState("");
+  const [serviceSelectid, setServiceId] = useState("");
   const [productSelect, setProduct] = useState("");
   const [tab, setTab] = useState(0);
+  const [orderId, setOrderId] = useState("");
 
   const [dataServices, setDataServices] = useState([]);
   const [dataProducts, setDataProducts] = useState([]);
-
+  const [youtubeData, setYoutubeData] = useState({});
   const [videoData, setVideoData] = useState(null);
   const [videoUrl, setVideoUrl] = useState("");
 
-  const { services, products, wallet } = useAuth();
+  const { services, products, wallet, handleSale, auth } = useAuth();
+
+  const navigate = useNavigate();
 
   const onSelectPlataform = (e) => {
     setPlataform(e);
@@ -30,6 +35,7 @@ const AddOrder = () => {
 
   const onSelectService = (e) => {
     setService(e.name);
+    setServiceId(e);
 
     const filter = products.filter((product) => product.service == e._id);
     setDataProducts(filter);
@@ -72,6 +78,7 @@ const AddOrder = () => {
 
           // Actualiza el estado con los datos del video
           setVideoData(response.data.items[0]);
+          setYoutubeData(response.data.items[0]);
         } catch (error) {
           console.error("Error al obtener datos del video:", error);
         }
@@ -80,6 +87,57 @@ const AddOrder = () => {
       fetchData();
     }
   }, [videoUrl]);
+
+  function obtenerCaracteres() {
+    const caracteres = "0123456789";
+    const caracteresUnicos = new Set();
+
+    while (caracteresUnicos.size < 8) {
+      const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+      const caracter = caracteres.charAt(indiceAleatorio);
+      caracteresUnicos.add(caracter);
+    }
+
+    return setOrderId([...caracteresUnicos].join(""));
+  }
+
+  useEffect(() => {
+    obtenerCaracteres();
+  }, []);
+
+  const initial = () => {
+    window.location.href = "/dashboard";
+  };
+
+  const saveOrder = () => {
+    if (wallet.value < productSelect[wallet.currency]) {
+      toast.error("No tienes suficientes fondos");
+      return;
+    }
+
+    const data = {
+      orderId,
+      client: `${auth.name} ${auth.lastname}`,
+      red: plataformSelect,
+      date: new Date(),
+      price: {
+        COP: productSelect["COP"],
+        VES: productSelect["VES"],
+        USD: productSelect["USD"],
+        MXN: productSelect["MXN"],
+      },
+      service: serviceSelectid._id,
+      initial: 0,
+      amount: productSelect.cantidad,
+      url: videoUrl,
+      currency: wallet.currency,
+      product: productSelect._id,
+      youtubeData,
+      // aditional: inputAditional,
+    };
+
+    handleSale(data, initial);
+  };
 
   return (
     <div
@@ -237,7 +295,9 @@ const AddOrder = () => {
         </>
       )}
 
-      {tab == 2 && serviceSelect.includes("Suscriptores") && <ChanelInfo />}
+      {tab == 2 && serviceSelect.includes("Suscriptores") && (
+        <ChanelInfo setYoutubeData={setYoutubeData} />
+      )}
 
       {tab == 2 && (
         <>
@@ -258,7 +318,10 @@ const AddOrder = () => {
           </div>
 
           <div className="grid mt-5 gap-3">
-            <button className="text-white gap-2 flex justify-center items-center bg-[#1E3050] p-1 rounded-lg text-lg font-bold">
+            <button
+              onClick={saveOrder}
+              className="text-white gap-2 flex justify-center items-center bg-[#1E3050] p-1 rounded-lg text-lg font-bold"
+            >
               Pagar Ahora
               <i class="fas fa-arrow-circle-right"></i>
             </button>
